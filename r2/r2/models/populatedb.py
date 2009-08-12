@@ -26,7 +26,7 @@ from r2.lib.utils import fetch_things2
 import string
 import random
 
-def populate(sr_name = 'reddit.com', sr_title = "reddit.com: what's new online",
+def populate(sr_name = 'tikical.com', sr_title = "tikical.com: social calendaring",
              num = 100):
     create_accounts(num)
 
