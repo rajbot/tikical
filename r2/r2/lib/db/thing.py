@@ -442,6 +442,7 @@ class Thing(DataThing):
 
     @property
     def _hot(self):
+	print '__date__: ', self._date
         return sorts.hot(self._ups, self._downs, self._date)
 
     @property

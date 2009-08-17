@@ -34,7 +34,7 @@ from r2.lib.strings import strings, Score
 from pylons import c, g, request
 from pylons.i18n import ungettext, _
 
-import random
+import datetime, random
 
 class LinkExists(Exception): pass
 
@@ -117,14 +117,15 @@ class Link(Thing, Printable):
         return submit_url
 
     @classmethod
-    def _submit(cls, title, url, author, sr, ip):
+    def _submit(cls, title, url, author, sr, ip, date=None):
         l = cls(title = title,
                 url = url,
                 _spam = author._spam,
                 author_id = author._id,
                 sr_id = sr._id, 
                 lang = sr.lang,
-                ip = ip)
+                ip = ip,
+                date = date)
         l._commit()
         l.set_url_cache()
         return l
@@ -294,6 +295,10 @@ class Link(Thing, Printable):
             if item.is_self:
                 item.url = item.make_permalink(item.subreddit, force_domain = True)
 
+            if type(item._date) == datetime.date:
+		item._date = datetime.datetime(item._date.year, item._date.month, item._date.day)
+            item._date = item._date.replace(tzinfo=g.tz)
+            print 'item._date is ', item._date
             # do we hide the score?
             if user_is_admin:
                 item.hide_score = False
