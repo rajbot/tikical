@@ -47,7 +47,7 @@ class PSTx(datetime.tzinfo):
 #
 # #self.debug(c.name == 'VEVENT' and (c.decoded('summary'),c.decoded('description'),c.decoded('url'),c.decoded('transp'), c.decoded('dtstart'),c.decoded('categories')) or 'boo')
 class icalendar(object):
-    def sync(self, sr_name, sr_title, url):
+    def sync(self, sr_name, sr_title, url, limit=None):
         a = list(Account._query(limit = 1))[0]
         try:
             sr = Subreddit._new(name = sr_name, title = sr_title, ip = '0.0.0.0', author_id = a._id)
@@ -58,10 +58,14 @@ class icalendar(object):
         from icalendar import Calendar
         data = urllib2.urlopen(url).read()
         cal = Calendar.from_string(data)
+	count = 0
         keys = ['summary', 'description', 'url', 'transp', 'dtstart', 'dtend', 'categories']
         events = [ ]
 	pstx = PSTx()
         for c in cal.walk():
+            count = count + 1
+            if limit and count > limit:
+                break
             if c.name == 'VEVENT':
                 d = {}
                 for k in keys:
@@ -79,7 +83,7 @@ class icalendar(object):
                     print 'already submitted %s' % links
                     continue
                 user = a
-                l = Link._submit(title, url, user, sr, '127.0.0.1', event_dt=date)
+                l = Link._submit(title, url, user, sr, '127.0.0.1', event_dt=date.isoformat())
 
 
 def populate(sr_name = 'reddit.com', sr_title = "reddit.com: what's new online",

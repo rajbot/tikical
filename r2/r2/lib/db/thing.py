@@ -398,7 +398,9 @@ class ThingMeta(type):
 
 class Thing(DataThing):
     __metaclass__ = ThingMeta
-    _base_props = ('_ups', '_downs', '_date', '_deleted', '_spam', '_event_dt')
+    _base_props = ('_ups', '_downs', '_date', '_deleted', '_spam')
+    #use this if you want event_dt as a 2nd column in reddit_data_link
+    #_base_props = ('_ups', '_downs', '_date', '_deleted', '_spam', '_event_dt')
     _int_props = ('_ups', '_downs')
     _make_fn = staticmethod(tdb.make_thing)
     _set_props = staticmethod(tdb.set_thing_props)
@@ -409,7 +411,9 @@ class Thing(DataThing):
     _type_prefix = 't'
 
     def __init__(self, ups = 0, downs = 0, date = None, deleted = False,
-                 spam = False, id = None, event_dt = None, **attrs):
+                 #uncomment below for event_dt in the reddit_data_link table
+                 #spam = False, id = None, event_dt = None, **attrs):
+                 spam = False, id = None, **attrs):
         DataThing.__init__(self)
 
         with self.safe_set_attr:
@@ -422,7 +426,8 @@ class Thing(DataThing):
             self._ups = ups
             self._downs = downs
             self._date = date
-            self._event_dt = event_dt
+            #uncomment this to get event_dt in the reddit_data_link table
+            #self._event_dt = event_dt
             self._deleted = deleted
             self._spam = spam
 
