@@ -398,7 +398,7 @@ class ThingMeta(type):
 
 class Thing(DataThing):
     __metaclass__ = ThingMeta
-    _base_props = ('_ups', '_downs', '_date', '_deleted', '_spam')
+    _base_props = ('_ups', '_downs', '_date', '_deleted', '_spam', '_event_dt')
     _int_props = ('_ups', '_downs')
     _make_fn = staticmethod(tdb.make_thing)
     _set_props = staticmethod(tdb.set_thing_props)
@@ -409,7 +409,7 @@ class Thing(DataThing):
     _type_prefix = 't'
 
     def __init__(self, ups = 0, downs = 0, date = None, deleted = False,
-                 spam = False, id = None, **attrs):
+                 spam = False, id = None, event_dt = None, **attrs):
         DataThing.__init__(self)
 
         with self.safe_set_attr:
@@ -419,10 +419,10 @@ class Thing(DataThing):
                 self._loaded = False
 
             if not date: date = datetime.now(g.tz)
-            
             self._ups = ups
             self._downs = downs
             self._date = date
+            self._event_dt = event_dt
             self._deleted = deleted
             self._spam = spam
 
@@ -442,7 +442,6 @@ class Thing(DataThing):
 
     @property
     def _hot(self):
-	print '__date__: ', self._date
         return sorts.hot(self._ups, self._downs, self._date)
 
     @property

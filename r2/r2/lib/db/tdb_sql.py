@@ -131,6 +131,10 @@ def get_thing_table(metadata, name):
                                sa.Boolean,
                                default = False,
                                nullable = False),
+                     sa.Column('event_dt',
+                               sa.DateTime(timezone = True),
+                               default = sa.func.now(),
+                               nullable = True),
                      sa.Column('date',
                                sa.DateTime(timezone = True),
                                default = sa.func.now(),
@@ -361,11 +365,11 @@ def get_rel_table(rel_type_id, action = 'read'):
                      rel_types_id[rel_type_id].tables)
 
 #TODO does the type actually exist?
-def make_thing(type_id, ups, downs, date, deleted, spam, id=None):
+def make_thing(type_id, ups, downs, date, deleted, spam, event_dt, id=None):
     table = get_thing_table(type_id, action = 'write')[0]
 
     params = dict(ups = ups, downs = downs,
-                  date = date, deleted = deleted, spam = spam)
+                  date = date, deleted = deleted, spam = spam, event_dt = event_dt)
 
     if id:
         params['thing_id'] = id

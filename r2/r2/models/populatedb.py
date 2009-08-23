@@ -79,7 +79,7 @@ class icalendar(object):
                     print 'already submitted %s' % links
                     continue
                 user = a
-                l = Link._submit(title, url, user, sr, '127.0.0.1', date=date)
+                l = Link._submit(title, url, user, sr, '127.0.0.1', event_dt=date)
 
 
 def populate(sr_name = 'reddit.com', sr_title = "reddit.com: what's new online",
@@ -95,7 +95,7 @@ def populate(sr_name = 'reddit.com', sr_title = "reddit.com: what's new online",
     except SubredditExists:
         pass
 
-    create_links(num)
+    #create_links(num)
     
 def create_accounts(num):
     for i in range(num):

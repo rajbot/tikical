@@ -117,7 +117,7 @@ class Link(Thing, Printable):
         return submit_url
 
     @classmethod
-    def _submit(cls, title, url, author, sr, ip, date=None):
+    def _submit(cls, title, url, author, sr, ip, event_dt=None):
         l = cls(title = title,
                 url = url,
                 _spam = author._spam,
@@ -125,7 +125,7 @@ class Link(Thing, Printable):
                 sr_id = sr._id, 
                 lang = sr.lang,
                 ip = ip,
-                date = date)
+                event_dt = event_dt)
         l._commit()
         l.set_url_cache()
         return l
@@ -298,7 +298,6 @@ class Link(Thing, Printable):
             if type(item._date) == datetime.date:
 		item._date = datetime.datetime(item._date.year, item._date.month, item._date.day)
             item._date = item._date.replace(tzinfo=g.tz)
-            print 'item._date is ', item._date
             # do we hide the score?
             if user_is_admin:
                 item.hide_score = False
