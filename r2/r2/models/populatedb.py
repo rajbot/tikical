@@ -83,7 +83,8 @@ class icalendar(object):
                     print 'already submitted %s' % links
                     continue
                 user = a
-                l = Link._submit(title, url, user, sr, '127.0.0.1', event_dt=date.isoformat())
+                #l = Link._submit(title, url, user, sr, '127.0.0.1', event_dt=date.isoformat())
+                l = Link._submit(title, url, user, sr, '127.0.0.1', event_dt=date)
 
 
 def populate(sr_name = 'tikical.com', sr_title = "tikical.com: social calendaring",
