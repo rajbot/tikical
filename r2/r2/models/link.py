@@ -282,6 +282,8 @@ class Link(Thing, Printable):
 
             item.score = max(0, item.score)
 
+            item.dated_title = item.event_dt.strftime('%a %d %b %I%p ').replace(' 0', ' ') + item.title
+
             item.domain = (domain(item.url) if not item.is_self
                           else 'self.' + item.subreddit.name)
             if not hasattr(item,'top_link'):
