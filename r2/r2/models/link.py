@@ -117,7 +117,7 @@ class Link(Thing, Printable):
         return submit_url
 
     @classmethod
-    def _submit(cls, title, url, author, sr, ip, event_dt):
+    def _submit(cls, title, url, author, sr, ip, event_dt=None):
         l = cls(title = title,
                 url = url,
                 _spam = author._spam,
@@ -125,7 +125,7 @@ class Link(Thing, Printable):
                 sr_id = sr._id, 
                 lang = sr.lang,
                 ip = ip,
-                event_dt=event_dt)
+                event_dt = event_dt)
         l._commit()
         l.set_url_cache()
         return l
