@@ -1049,7 +1049,7 @@ def link_from_url(path, filter_spam = False, multiple = True):
 
     if not path:
         return
-
+    print path
     try:
         links = Link._by_url(path, c.site)
     except NotFound:

@@ -137,7 +137,7 @@ class Builder(object):
         wrapped = []
         count = 0
 
-        if isinstance(c.site, FakeSubreddit):
+        if isinstance(c.site, FakeSubreddit) or isinstance(c.site, str):
             mods = []
         else:
             mods = c.site.moderators
@@ -255,9 +255,10 @@ class Builder(object):
 
         # recache the user object: it may be None if user is not logged in,
         # whereas now we are happy to have the UnloggedUser object
-        user = c.user
-        for cls in types.keys():
-            cls.add_props(user, types[cls])
+	if type(c.user) != str:
+       	    user = c.user
+            for cls in types.keys():
+                cls.add_props(user, types[cls])
 
         return wrapped
 

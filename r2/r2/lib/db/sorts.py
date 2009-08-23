@@ -28,6 +28,7 @@ epoch = datetime(1970, 1, 1, tzinfo = g.tz)
 def epoch_seconds(date):
     """Returns the number of seconds from the epoch to date. Should match
     the number returned by the equivalent function in postgres."""
+    print date
     td = date - epoch
     return td.days * 86400 + td.seconds + (float(td.microseconds) / 1000000)
     

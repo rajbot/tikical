@@ -34,7 +34,7 @@ from r2.lib.strings import strings, Score
 from pylons import c, g, request
 from pylons.i18n import ungettext, _
 
-import random
+import datetime, random
 
 class LinkExists(Exception): pass
 
@@ -125,7 +125,7 @@ class Link(Thing, Printable):
                 sr_id = sr._id, 
                 lang = sr.lang,
                 ip = ip,
-                event_dt=event_dt) #tikical: add event_dt (utc datetime in the form '1970-01-01T00:00:00')
+                event_dt=event_dt)
         l._commit()
         l.set_url_cache()
         return l
@@ -295,6 +295,9 @@ class Link(Thing, Printable):
             if item.is_self:
                 item.url = item.make_permalink(item.subreddit, force_domain = True)
 
+            if type(item._date) == datetime.date:
+		item._date = datetime.datetime(item._date.year, item._date.month, item._date.day)
+            item._date = item._date.replace(tzinfo=g.tz)
             # do we hide the score?
             if user_is_admin:
                 item.hide_score = False
