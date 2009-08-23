@@ -117,14 +117,15 @@ class Link(Thing, Printable):
         return submit_url
 
     @classmethod
-    def _submit(cls, title, url, author, sr, ip):
+    def _submit(cls, title, url, author, sr, ip, event_dt):
         l = cls(title = title,
                 url = url,
                 _spam = author._spam,
                 author_id = author._id,
                 sr_id = sr._id, 
                 lang = sr.lang,
-                ip = ip)
+                ip = ip,
+                event_dt=event_dt) #tikical: add event_dt (utc datetime in the form '1970-01-01T00:00:00')
         l._commit()
         l.set_url_cache()
         return l

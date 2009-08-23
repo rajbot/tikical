@@ -55,13 +55,17 @@ def create_accounts(num):
 def create_links(num):
     accounts = list(Account._query(limit = num, data = True))
     subreddits = list(Subreddit._query(limit = num, data = True))
+    import datetime
+    d = datetime.datetime.utcnow()
+    d = d - datetime.timedelta(microseconds=d.microsecond)
     for i in range(num):
         id = random.uniform(1,100)
         title = url = 'http://google.com/?q=' + str(id)
         user = random.choice(accounts)
         sr = random.choice(subreddits)
-        l = Link._submit(title, url, user, sr, '127.0.0.1')
-
+        date = d + datetime.timedelta(days=i)
+        l = Link._submit(title, url, user, sr, '127.0.0.1', date.isoformat())
+        
         if random.choice(([False] * 50) + [True]):
             promote.promote(l)
             
