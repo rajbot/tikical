@@ -303,6 +303,48 @@ class NewController(ListingController):
         self.sort = sort
         return ListingController.GET_listing(self, **env)
 
+#copied from NewController
+class UpcomingController(ListingController):
+    where = 'upcoming'
+    title_text = _('upcoming events')
+
+    @property
+    def menus(self):
+        return [NewMenu(default = self.sort)]
+
+    def keep_fn(self):
+        def keep(item):
+            """Avoid showing links that are too young, to give time
+            for things like the spam filter and thumbnail fetcher to
+            act on them before releasing them into the wild"""
+            wouldkeep = item.keep_item(item)
+            if c.user_is_loggedin and (c.user_is_admin or item.subreddit.is_moderator(c.user)):
+                # let admins and moderators see them regardless
+                return wouldkeep
+            elif wouldkeep and c.user_is_loggedin and c.user._id == item.author_id:
+                # also let the author of the link see them
+                return True
+            elif item._date > timeago(g.new_incubation):
+                # it's too young to show yet
+                return False
+            else:
+                # otherwise, fall back to the regular logic (don't
+                # show hidden links, etc)
+                return wouldkeep
+
+        return keep
+
+    def query(self):
+        if self.sort == 'rising':
+            return get_rising(c.site)
+        else:
+            return c.site.get_links('new', 'all')
+
+    @validate(sort = VMenu('controller', NewMenu))
+    def GET_listing(self, sort, **env):
+        self.sort = sort
+        return ListingController.GET_listing(self, **env)
+
 class BrowseController(ListingController):
     where = 'browse'
 

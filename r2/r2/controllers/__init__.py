@@ -24,6 +24,7 @@ from listingcontroller import HotController
 from listingcontroller import SavedController
 from listingcontroller import ToplinksController
 from listingcontroller import NewController
+from listingcontroller import UpcomingController
 from listingcontroller import BrowseController
 from listingcontroller import RecommendedController
 from listingcontroller import MessageController

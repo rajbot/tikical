@@ -213,8 +213,9 @@ class Reddit(Templated):
         is a list of menus which will be rendered in order and
         displayed at the top of the Reddit."""
         main_buttons = [NamedButton('hot', dest='', aliases=['/hot']),
-                        NamedButton('new'), 
-                        NamedButton('controversial'),
+                        NamedButton('new'),
+                        NamedButton('upcoming'),
+                        #NamedButton('controversial'),
                         NamedButton('top'),
                         NamedButton('saved', False)
                         ]
