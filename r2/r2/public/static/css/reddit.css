@@ -138,7 +138,7 @@ ul.flat-vert {text-align: left;}
     position: absolute;
     right: 0px;
     bottom: 0px;
-    background-color: white;
+    background-color: white; /*tikical change*/
     padding: 4px;
     -moz-border-radius-topleft: 7px;
     -webkit-border-top-left-radius: 7px;
