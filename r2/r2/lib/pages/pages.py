@@ -144,14 +144,14 @@ class Reddit(Templated):
             ps.append(SubredditInfoBar())
 
         if self.submit_box:
-            ps.append(SideBox(_('Submit a link'),
+            ps.append(SideBox(_('Submit an event'),
                               '/submit', 'submit',
                               sr_path = True,
                               subtitles = [strings.submit_box_text],
                               show_cover = True))
             
         if self.create_reddit_box:
-           ps.append(SideBox(_('Create your own reddit'),
+           ps.append(SideBox(_('Create your own calendar'),
                               '/reddits/create', 'create',
                               subtitles = rand_strings.get("create_reddit", 2),
                               show_cover = True, nocname=True))

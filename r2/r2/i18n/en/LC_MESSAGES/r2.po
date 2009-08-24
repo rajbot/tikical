@@ -1925,23 +1925,23 @@ msgstr "It's ok to cry."
 
 #: randomstring:create_reddit
 msgid "Reason to create a reddit 1"
-msgstr "...for your favorite subject."
+msgstr "...for your favorite tiki bar."
 
 #: randomstring:create_reddit
 msgid "Reason to create a reddit 2"
-msgstr "...for your favorite sorority."
+msgstr "...a private calendar for your team at work."
 
 #: randomstring:create_reddit
 msgid "Reason to create a reddit 3"
-msgstr "...for your favorite team."
+msgstr "...for your local street fairs."
 
 #: randomstring:create_reddit
 msgid "Reason to create a reddit 4"
-msgstr "...because you love freedom."
+msgstr "...because you got stuff to do."
 
 #: randomstring:create_reddit
 msgid "Reason to create a reddit 5"
-msgstr "...because you hate freedom."
+msgstr "...because you keep forgetting to eat."
 
 #: randomstring:create_reddit
 msgid "Reason to create a reddit 6"
@@ -1949,31 +1949,31 @@ msgstr "...for a fringe political candidate."
 
 #: randomstring:create_reddit
 msgid "Reason to create a reddit 7"
-msgstr "...for your favorite hobby."
+msgstr "...for your favorite niteclub."
 
 #: randomstring:create_reddit
 msgid "Reason to create a reddit 8"
-msgstr "...for your favorite programming language."
+msgstr "...for your favorite film fest."
 
 #: randomstring:create_reddit
 msgid "Reason to create a reddit 9"
-msgstr "...for your WoW guild."
+msgstr "...for your favorite happy hours."
 
 #: randomstring:create_reddit
 msgid "Reason to create a reddit 10"
-msgstr "...for your Quake 2 clan."
+msgstr "...a private calendar for your family events."
 
 #: randomstring:create_reddit
 msgid "Reason to create a reddit 11"
-msgstr "...because this room is full of win!"
+msgstr "...so you don't miss another birthday!"
 
 #: randomstring:create_reddit
 msgid "Reason to create a reddit 12"
-msgstr "...for your LARPing community."
+msgstr "...for your neighborhood dinner parties."
 
 #: randomstring:create_reddit
 msgid "Reason to create a reddit 13"
-msgstr "...for people who know that Han shot first."
+msgstr "...for your puppy play dates."
 
 #: randomstring:create_reddit
 msgid "Reason to create a reddit 14"
@@ -1985,15 +1985,15 @@ msgstr "...for your community of llama farmers."
 
 #: randomstring:create_reddit
 msgid "Reason to create a reddit 16"
-msgstr "...because 4chan is getting overcrowded."
+msgstr "...because your community town halls... WAKE UP SHEEPLE!"
 
 #: randomstring:create_reddit
 msgid "Reason to create a reddit 17"
-msgstr "...because nothing in life is free (except reddits!)"
+msgstr "...how else will you know when to drink?"
 
 #: randomstring:create_reddit
 msgid "Reason to create a reddit 18"
-msgstr "...sudo create your own reddit."
+msgstr "...everyone needs their own calendar."
 
 #: randomstring:create_reddit
 msgid "Reason to create a reddit 19"
