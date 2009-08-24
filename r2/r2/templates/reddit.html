@@ -161,13 +161,11 @@
   </body>
 </%def>
 
-<%def name="sidebar(content=None)">
+<%def name="sidebar(content=None)">  
   ${content}
 
   %if c.user_is_admin:
     <%include file="admin_rightbox.html"/>
-  %else:
-    <%include file="ads.html"/>
   %endif
 
   ##cheating... we should move ads into a template of its own
