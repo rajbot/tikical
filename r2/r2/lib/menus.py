@@ -428,6 +428,21 @@ class NewMenu(SimpleGetMenu):
     def operator(self, sort):
         if sort == 'new':
             return operators.desc('_date')
+
+class UpcomingMenu(SimpleGetMenu):
+    get_param = 'sort'
+    default   = 'upcoming'
+    options   = ('upcoming', 'rising')
+    type = 'flatlist'
+
+    def __init__(self, **kw):
+        kw['title'] = ""
+        SimpleGetMenu.__init__(self, **kw)
+
+    @classmethod
+    def operator(self, sort):
+        if sort == 'upcoming':
+            return operators.asc('_event_dt')
         
 
 class KindMenu(SimpleGetMenu):

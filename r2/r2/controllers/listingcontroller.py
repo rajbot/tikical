@@ -25,7 +25,7 @@ from validator import *
 from r2.models import *
 from r2.lib.pages import *
 from r2.lib.pages.things import wrap_links
-from r2.lib.menus import NewMenu, TimeMenu, SortMenu, RecSortMenu, ControversyTimeMenu
+from r2.lib.menus import NewMenu, TimeMenu, SortMenu, RecSortMenu, ControversyTimeMenu, UpcomingMenu
 from r2.lib.rising import get_rising
 from r2.lib.wrapped import Wrapped
 from r2.lib.normalized_hot import normalized_hot, get_hot
@@ -310,7 +310,7 @@ class UpcomingController(ListingController):
 
     @property
     def menus(self):
-        return [NewMenu(default = self.sort)]
+        return [UpcomingMenu(default = self.sort)]
 
     def keep_fn(self):
         def keep(item):
@@ -338,9 +338,9 @@ class UpcomingController(ListingController):
         if self.sort == 'rising':
             return get_rising(c.site)
         else:
-            return c.site.get_links('new', 'all')
+            return c.site.get_links('upcoming', 'all')
 
-    @validate(sort = VMenu('controller', NewMenu))
+    @validate(sort = VMenu('controller', UpcomingMenu))
     def GET_listing(self, sort, **env):
         self.sort = sort
         return ListingController.GET_listing(self, **env)

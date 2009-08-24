@@ -19,7 +19,8 @@ db_sorts = dict(hot = (desc, '_hot'),
                 top = (desc, '_score'),
                 controversial = (desc, '_controversy'),
                 old = (asc, '_date'),
-                toplinks = (desc, '_hot'))
+                toplinks = (desc, '_hot'),
+                upcoming = (asc, '_event_dt'))
 
 def db_sort(sort):
     cls, col = db_sorts[sort]
@@ -29,14 +30,16 @@ search_sort = dict(hot = 'hot desc',
                    new = 'date desc',
                    top = 'points desc',
                    controversial = 'controversy desc',
-                   old = 'date asc')
+                   old = 'date asc',
+                   upcoming = 'event_dt desc')
 
 db_times = dict(all = None,
                 hour = Thing.c._date >= timeago('1 hour'),
                 day = Thing.c._date >= timeago('1 day'),
                 week = Thing.c._date >= timeago('1 week'),
                 month = Thing.c._date >= timeago('1 month'),
-                year = Thing.c._date >= timeago('1 year'))
+                year = Thing.c._date >= timeago('1 year'),
+                upcoming = Thing.c._event_dt >= timeago('1 second'))
 
 #we need to define the filter functions here so cachedresults can be pickled
 def filter_identity(x):
