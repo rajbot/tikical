@@ -529,9 +529,9 @@ class AllSR(FakeSubreddit):
 
 class DefaultSR(FakeSubreddit):
     #notice the space before reddit.com
-    name = ' reddit.com'
+    name = ' tikical.com'
     path = '/'
-    header = 'http://static.reddit.com/reddit.com.header.png'
+    header = 'http://127.0.0.1:8080/static/tikical.com.header.png'
 
     def get_links_sr_ids(self, sr_ids, sort, time):
         from r2.lib.db import queries

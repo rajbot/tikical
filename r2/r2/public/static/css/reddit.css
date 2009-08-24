@@ -116,10 +116,10 @@ ul.flat-vert {text-align: left;}
 
 #header {
 
-    border-bottom: 1px solid #5f99cf;
+    border-bottom: 1px solid #999933; /*tikical change*/
 
     position: relative;
-    background-color: #cee3f8;
+    background-color:#f3f3ec; /*tikical change*/
     z-index: 99;
 }
 
@@ -249,11 +249,11 @@ ul.flat-vert {text-align: left;}
 
 .tabmenu li a { 
     padding: 2px 6px 0 6px;
-    background-color: #eff7ff;
+    background-color: #e0e0e0; /*tikical change*/
  }
 
 .tabmenu li.selected a{ 
-    color: orangered;
+    color: #336699; /*tikical change*/
     background-color: white;
     border: 1px solid #5f99cf;
     border-bottom: 1px solid white;
