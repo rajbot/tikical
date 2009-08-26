@@ -48,7 +48,13 @@ class PSTx(datetime.tzinfo):
 # #self.debug(c.name == 'VEVENT' and (c.decoded('summary'),c.decoded('description'),c.decoded('url'),c.decoded('transp'), c.decoded('dtstart'),c.decoded('categories')) or 'boo')
 class icalendar(object):
     def sync(self, sr_name, sr_title, url, limit=None):
-        a = list(Account._query(limit = 1))[0]
+        account_name = sr_name.lower()
+        try:
+            register(account_name, account_name)
+        except AccountExists:
+            pass
+        a = Account._by_name(account_name)
+
         try:
             sr = Subreddit._new(name = sr_name, title = sr_title, ip = '0.0.0.0', author_id = a._id)
             sr._commit()
