@@ -874,12 +874,25 @@ class VCnameDomain(Validator):
                 return str(domain).lower()
             except UnicodeEncodeError:
                 self.set_error(errors.BAD_CNAME)
-
+                
 class VTranslation(Validator):
     def run(self, param):
         from r2.lib.translation import Translator
         if Translator.exists(param):
             return Translator(locale = param)
+
+class VDate(Validator):
+        
+    date_re  = re.compile(r'^\d\d/\d\d/\d\d\d\d$')
+
+    def run(self, date):
+        #print date
+        
+        #I tried to make VDate be a subclass of VRequired, but it didn't work
+        if not date:
+            self.set_error(errors.NO_DATE)
+        if (date and not self.date_re.match(date)):
+            self.set_error(errors.BAD_DATE)
 
 # NOTE: make sure *never* to have res check these are present
 # otherwise, the response could contain reference to these errors...!

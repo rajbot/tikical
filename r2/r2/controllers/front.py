@@ -496,8 +496,9 @@ class FrontController(RedditController):
               VSRSubmitPage(),
               url = VRequired('url', None),
               title = VRequired('title', None),
-              then = VOneOf('then', ('tb','comments'), default = 'comments'))
-    def GET_submit(self, url, title, then):
+              then = VOneOf('then', ('tb','comments'), default = 'comments'),
+              eventdate = VDate('eventdate', None))
+    def GET_submit(self, url, title, then, eventdate):
         """Submit form."""
         if url and not request.get.get('resubmit'):
             # check to see if the url has already been submitted
@@ -522,7 +523,7 @@ class FrontController(RedditController):
                                         title=title or '',
                                         subreddits = sr_names,
                                         captcha=captcha,
-                                        then = then)).render()
+                                        then = then, eventdate = eventdate)).render()
 
     def _render_opt_in_out(self, msg_hash, leave):
         """Generates the form for an optin/optout page"""

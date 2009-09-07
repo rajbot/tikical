@@ -45,6 +45,124 @@ ${thing.formtabs_menu}
 </div>
 
 <div class="spacer">
+  <script src="/static/ui.core.js"  type="text/javascript"></script>
+  <script src="/static/ui.datepicker.js"  type="text/javascript"></script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $("#eventdate").datepicker();
+  });
+  </script>  
+  <%utils:round_field title="${_('event time (optional)')}" id="eventtime-field" style="width:230px;  float:right;">
+    <select id="eventtime" name="eventtime">
+    <option selected="selected">(none)</option>
+    <option value="0000">12:00 am</option>
+    <option value="0015">12:15 am</option>
+    <option value="0030">12:30 am</option>
+    <option value="0045">12:45 am</option>
+    <option value="0100">1:00 am</option>
+    <option value="0115">1:15 am</option>
+    <option value="0130">1:30 am</option>
+    <option value="0145">1:45 am</option>
+    <option value="0200">2:00 am</option>
+    <option value="0215">2:15 am</option>
+    <option value="0230">2:30 am</option>
+    <option value="0245">2:45 am</option>
+    <option value="0300">3:00 am</option>
+    <option value="0315">3:15 am</option>
+    <option value="0330">3:30 am</option>
+    <option value="0345">3:45 am</option>
+    <option value="0400">4:00 am</option>
+    <option value="0415">4:15 am</option>
+    <option value="0430">4:30 am</option>
+    <option value="0445">4:45 am</option>
+    <option value="0500">5:00 am</option>
+    <option value="0515">5:15 am</option>
+    <option value="0530">5:30 am</option>
+    <option value="0545">5:45 am</option>
+    <option value="0600">6:00 am</option>
+    <option value="0615">6:15 am</option>
+    <option value="0630">6:30 am</option>
+    <option value="0645">6:45 am</option>
+    <option value="0700">7:00 am</option>
+    <option value="0715">7:15 am</option>
+    <option value="0730">7:30 am</option>
+    <option value="0745">7:45 am</option>
+    <option value="0800">8:00 am</option>
+    <option value="0815">8:15 am</option>
+    <option value="0830">8:30 am</option>
+    <option value="0845">8:45 am</option>
+    <option value="0900">9:00 am</option>
+    <option value="0915">9:15 am</option>
+    <option value="0930">9:30 am</option>
+    <option value="0945">9:45 am</option>
+    <option value="1000">10:00 am</option>
+    <option value="1015">10:15 am</option>
+    <option value="1030">10:30 am</option>
+    <option value="1045">10:45 am</option>
+    <option value="1100">11:00 am</option>
+    <option value="1115">11:15 am</option>
+    <option value="1130">11:30 am</option>
+    <option value="1145">11:45 am</option>
+    <option value="1200">12:00 pm</option>
+    <option value="1215">12:15 pm</option>
+    <option value="1230">12:30 pm</option>
+    <option value="1245">12:45 pm</option>
+    <option value="1300">1:00 pm</option>
+    <option value="1315">1:15 pm</option>
+    <option value="1330">1:30 pm</option>
+    <option value="1345">1:45 pm</option>
+    <option value="1400">2:00 pm</option>
+    <option value="1415">2:15 pm</option>
+    <option value="1430">2:30 pm</option>
+    <option value="1445">2:45 pm</option>
+    <option value="1500">3:00 pm</option>
+    <option value="1515">3:15 pm</option>
+    <option value="1530">3:30 pm</option>
+    <option value="1545">3:45 pm</option>
+    <option value="1600">4:00 pm</option>
+    <option value="1615">4:15 pm</option>
+    <option value="1630">4:30 pm</option>
+    <option value="1645">4:45 pm</option>
+    <option value="1700">5:00 pm</option>
+    <option value="1715">5:15 pm</option>
+    <option value="1730">5:30 pm</option>
+    <option value="1745">5:45 pm</option>
+    <option value="1800">6:00 pm</option>
+    <option value="1815">6:15 pm</option>
+    <option value="1830">6:30 pm</option>
+    <option value="1845">6:45 pm</option>
+    <option value="1900">7:00 pm</option>
+    <option value="1915">7:15 pm</option>
+    <option value="1930">7:30 pm</option>
+    <option value="1945">7:45 pm</option>
+    <option value="2000">8:00 pm</option>
+    <option value="2015">8:15 pm</option>
+    <option value="2030">8:30 pm</option>
+    <option value="2045">8:45 pm</option>
+    <option value="2100">9:00 pm</option>
+    <option value="2115">9:15 pm</option>
+    <option value="2130">9:30 pm</option>
+    <option value="2145">9:45 pm</option>
+    <option value="2200">10:00 pm</option>
+    <option value="2215">10:15 pm</option>
+    <option value="2230">10:30 pm</option>
+    <option value="2245">10:45 pm</option>
+    <option value="2300">11:00 pm</option>
+    <option value="2315">11:15 pm</option>
+    <option value="2330">11:30 pm</option>
+    <option value="2345">11:45 pm</option>
+    </select>
+    ${error_field("NO_TIME",  "eventtime", "div")}
+    ${error_field("BAD_TIME", "eventtime", "div")}
+  </%utils:round_field>
+  <%utils:round_field title="${_('event date')}" id="eventdate-field" style="width:230px;">
+    <input type="text" id="eventdate" name="eventdate" value="${thing.eventdate}" style="width:10em;" />
+    ${error_field("NO_DATE",  "eventdate", "div")}
+    ${error_field("BAD_DATE", "eventdate", "div")}
+  </%utils:round_field>
+</div>
+
+<div class="spacer">
   <%utils:round_field title="${_('title')}" id="title-field">
     <textarea name="title" rows="2" cols="1" wrap="hard">${thing.title}</textarea>
     ${error_field("NO_TEXT", "title", "div")}

@@ -67,6 +67,9 @@ error_list = dict((
 
         ('TOO_LONG', _("this is too long (max: %(max_length)s)")),
         ('NO_TEXT', _('we need something here')),
+
+        ('NO_DATE',  _('an event date is required.')),        
+        ('BAD_DATE', _('date must be in mm/dd/yyyy format.')),
     ))
 errors = Storage([(e, e) for e in error_list.keys()])
 

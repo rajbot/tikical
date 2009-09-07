@@ -1097,7 +1097,7 @@ class FrameToolbar(Wrapped):
 class NewLink(Templated):
     """Render the link submission form"""
     def __init__(self, captcha = None, url = '', title= '', subreddits = (),
-                 then = 'comments'):
+                 then = 'comments', eventdate=None):
         tabs = (('link', ('link-desc', 'url-field')),
                 ('text', ('text-desc', 'text-field')))
         all_fields = set(chain(*(parts for (tab, parts) in tabs)))
@@ -1129,7 +1129,7 @@ class NewLink(Templated):
 
         Templated.__init__(self, captcha = captcha, url = url,
                          title = title, subreddits = subreddits,
-                         then = then)
+                         then = then, eventdate = eventdate)
 
 class ShareLink(CachedTemplate):
     def __init__(self, link_name = "", emails = None):

@@ -148,9 +148,10 @@ class ApiController(RedditController):
                    save = VBoolean('save'),
                    selftext = VSelfText('text'),
                    kind = VOneOf('kind', ['link', 'self', 'poll']),
-                   then = VOneOf('then', ('tb', 'comments'), default='comments'))
+                   then = VOneOf('then', ('tb', 'comments'), default='comments'),
+                   eventdate = VDate('eventdate'))
     def POST_submit(self, form, jquery, url, selftext, kind, title, save,
-                    sr, ip, then):
+                    sr, ip, then, eventdate):
         #backwards compatability
         if url == 'self':
             kind = 'self'
@@ -195,7 +196,13 @@ class ApiController(RedditController):
 
         if form.has_errors('ratelimit', errors.RATELIMIT):
             pass
-
+            
+        if form.has_errors('eventdate', errors.NO_DATE):
+            pass
+        
+        if form.has_errors('eventdate', errors.BAD_DATE):
+            pass
+        
         if form.has_error() or not title:
             return
 
