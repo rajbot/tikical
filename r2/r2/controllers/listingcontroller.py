@@ -338,7 +338,7 @@ class UpcomingController(ListingController):
         if self.sort == 'rising':
             return get_rising(c.site)
         else:
-            return c.site.get_links('upcoming', 'all')
+            return c.site.get_links('upcoming', 'upcoming')
 
     @validate(sort = VMenu('controller', UpcomingMenu))
     def GET_listing(self, sort, **env):

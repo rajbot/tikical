@@ -455,7 +455,7 @@ class Thing(DataThing):
     @classmethod
     def _build(cls, id, bases):
         return cls(bases.ups, bases.downs, bases.date,
-                   bases.deleted, bases.spam, id)
+                   bases.deleted, bases.spam, id, bases.event_dt)
 
     @classmethod
     def _query(cls, *rules, **kw):

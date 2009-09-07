@@ -568,7 +568,8 @@ def get_thing(type_id, thing_id):
                        downs = row.downs,
                        date = row.date,
                        deleted = row.deleted,
-                       spam = row.spam)
+                       spam = row.spam,
+                       event_dt = row.event_dt)
         if single:
             res = stor
         else:
