@@ -70,6 +70,7 @@ error_list = dict((
 
         ('NO_DATE',  _('an event date is required.')),        
         ('BAD_DATE', _('date must be in mm/dd/yyyy format.')),
+        ('BAD_TIME', _('time is not formatted properly.')),
     ))
 errors = Storage([(e, e) for e in error_list.keys()])
 

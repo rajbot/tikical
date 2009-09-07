@@ -891,9 +891,22 @@ class VDate(Validator):
         #I tried to make VDate be a subclass of VRequired, but it didn't work
         if not date:
             self.set_error(errors.NO_DATE)
-        if (date and not self.date_re.match(date)):
+        elif (date and not self.date_re.match(date)):
             self.set_error(errors.BAD_DATE)
+        else:
+            return date
 
+class VTime(Validator):
+        
+    time_re  = re.compile(r'^\d{4}$')
+
+    def run(self, time):
+        
+        if ('(none)' != time) and not self.time_re.match(time):
+            self.set_error(errors.BAD_TIME)
+        else:
+            return time
+            
 # NOTE: make sure *never* to have res check these are present
 # otherwise, the response could contain reference to these errors...!
 class ValidIP(Validator):

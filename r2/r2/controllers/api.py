@@ -56,6 +56,8 @@ from md5 import md5
 
 from r2.lib.promote import promote, unpromote, get_promoted
 
+from r2.models.tikical_time import PSTx
+
 class ApiController(RedditController):
     """
     Controller which deals with almost all AJAX site interaction.  
@@ -149,9 +151,10 @@ class ApiController(RedditController):
                    selftext = VSelfText('text'),
                    kind = VOneOf('kind', ['link', 'self', 'poll']),
                    then = VOneOf('then', ('tb', 'comments'), default='comments'),
-                   eventdate = VDate('eventdate'))
+                   eventdate = VDate('eventdate'),
+                   eventtime = VTime('eventtime'))
     def POST_submit(self, form, jquery, url, selftext, kind, title, save,
-                    sr, ip, then, eventdate):
+                    sr, ip, then, eventdate, eventtime):
         #backwards compatability
         if url == 'self':
             kind = 'self'
@@ -180,7 +183,10 @@ class ApiController(RedditController):
 
         if kind == 'link':
             # check for no url, or clear that error field on return
-            if form.has_errors("url", errors.NO_URL, errors.BAD_URL):
+            
+            ### if no url, just set it to self
+            ###if form.has_errors("url", errors.NO_URL, errors.BAD_URL):
+            if form.has_errors("url", errors.BAD_URL):
                 pass
             elif form.has_errors("url", errors.ALREADY_SUB):
                 form.redirect(url[0].already_submitted_link)
@@ -202,13 +208,29 @@ class ApiController(RedditController):
         
         if form.has_errors('eventdate', errors.BAD_DATE):
             pass
+
+        if form.has_errors('eventtime', errors.BAD_TIME):
+            pass
+        
+        if ('link' == kind) and (None == url):
+            kind = 'self'
+            url  = 'self'
+            
+        pstx = PSTx()
+        if ('(none)' == eventtime):
+            dt = datetime.strptime(eventdate, '%m/%d/%Y')
+            dt = dt.replace(tzinfo=pstx)
+        else:
+            dt = datetime.strptime(eventdate+eventtime, '%m/%d/%Y%H%M')
+            dt = dt.replace(tzinfo=pstx)
+            
         
         if form.has_error() or not title:
             return
 
         # well, nothing left to do but submit it
         l = Link._submit(request.post.title, url if kind == 'link' else 'self',
-                         c.user, sr, ip)
+                         c.user, sr, ip, event_dt=dt)
 
         if kind == 'self':
             l.url = l.make_permalink_slow()
