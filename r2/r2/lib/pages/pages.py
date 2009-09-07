@@ -212,9 +212,9 @@ class Reddit(Templated):
         """Sets the layout of the navigation topbar on a Reddit.  The result
         is a list of menus which will be rendered in order and
         displayed at the top of the Reddit."""
-        main_buttons = [NamedButton('hot', dest='', aliases=['/hot']),
+        main_buttons = [NamedButton('upcoming', dest='', aliases=['/upcoming']),
+                        NamedButton('hot'),
                         NamedButton('new'),
-                        NamedButton('upcoming'),
                         #NamedButton('controversial'),
                         NamedButton('top'),
                         NamedButton('saved', False)
