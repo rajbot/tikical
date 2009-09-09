@@ -1,0 +1,16 @@
+#memcached upstart script
+
+#to start memcached, use 'sudo start memcached'
+##to stop memcached, use 'sudo stop memcached'
+
+start on runlevel 2
+start on runlevel 3
+start on runlevel 4
+start on runlevel 5
+
+stop on runlevel 0
+stop on runlevel 1
+stop on runlevel 6
+
+respawn
+exec /usr/local/bin/memcached -m 64 -p 11211 -u nobody -l 127.0.0.1
