@@ -52,7 +52,7 @@ ${thing.formtabs_menu}
     $("#eventdate").datepicker();
   });
   </script>  
-  <%utils:round_field title="${_('event time (optional)')}" id="eventtime-field" style="width:230px;  float:right;">
+  <%utils:round_field title="${_('event time')}" description="${_('(optional)')}" id="eventtime-field" style="width:230px;  float:right;">
     <select id="eventtime" name="eventtime">
     <option selected="selected">(none)</option>
     <option value="0000">12:00 am</option>
@@ -170,7 +170,7 @@ ${thing.formtabs_menu}
 </div>
 
 <div class="spacer">
-  <%utils:round_field title="${_('url')}" id="url-field">
+  <%utils:round_field title="${_('url')}" description="${_('(optional)')}" id="url-field">
     <input name="kind" value="link" type="hidden"/>
     <input id="url" name="url" type="text" value="${thing.url}"/>
     ${error_field("NO_URL", "url", "div")}
