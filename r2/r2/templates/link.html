@@ -31,11 +31,15 @@
  
 <%def name="numcol()">
   <% num = thing.num %>
-  <span class="rank" style="width:${thing.numcolmargin};">
+  <span class="eventdate" style="width:6em;">
     %if thing.top_link:
       <a class="star" href="/toplinks">
     %endif
-    ${thing.num}
+    ${thing.eventdate}
+    %if not thing.allday:
+        <br/>
+        ${thing.eventtime}
+    %endif
     %if thing.top_link:
       </a>
     %endif
@@ -71,7 +75,7 @@
 <%def name="entry()">
   <p class="title">
     <%call expr="make_link('title', 'title')">
-      ${thing.dated_title} 
+      ${thing.title} 
     </%call>
     &#32;
     ${self.domain()}

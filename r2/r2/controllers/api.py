@@ -236,9 +236,15 @@ class ApiController(RedditController):
             l.url = l.make_permalink_slow()
             l.is_self = True
             l.selftext = selftext
-
+            if ('(none)' == eventtime):
+                l.allday = True
             l._commit()
             l.set_url_cache()
+        elif ('(none)' == eventtime):
+            l.allday = True
+            l._commit()
+            l.set_url_cache()
+        
 
         v = Vote.vote(c.user, l, True, ip)
         if save:

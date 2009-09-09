@@ -53,7 +53,8 @@ class Link(Thing, Printable):
                      promoted_by = None,
                      disable_comments = False,
                      selftext = '',
-                     ip = '0.0.0.0')
+                     ip = '0.0.0.0',
+                     allday = False)
 
 
     def __init__(self, *a, **kw):
@@ -282,7 +283,9 @@ class Link(Thing, Printable):
 
             item.score = max(0, item.score)
 
-            item.dated_title = item._event_dt.strftime('%a %d %b %I%p ').replace(' 0', ' ') + item.title
+            #item.dated_title = item._event_dt.strftime('%a %d %b %I%p ').replace(' 0', ' ') + item.title
+            item.eventdate   = item._event_dt.strftime('%a %m/%d')
+            item.eventtime   = item._event_dt.strftime('%I:%M %p').lstrip('0')
 
             item.domain = (domain(item.url) if not item.is_self
                           else 'self.' + item.subreddit.name)

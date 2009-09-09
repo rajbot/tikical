@@ -2273,5 +2273,10 @@ ul.tabmenu.formtab {
     margin-left: 10px;
     margin-bottom: 10px; }
 
-
-
+.eventdate {
+    float:left;
+    margin-top: 1px;
+    color: #C6C6C6;
+    font-size: medium;
+    text-align: right;
+}
