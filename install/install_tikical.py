@@ -17,8 +17,9 @@ def cmd(description, command):
     print out
     assert 0 == ret
     
-cmd('installing deb packages', """sudo DEBIAN_FRONTEND=noninteractive apt-get --force-yes -qq install curl gcc gettext git-core libfreetype6 libfreetype6-dev libjpeg62 libjpeg62-dev libpng12-0 libpq-dev memcached postgresql python python-dev python-setuptools subversion  python-imaging""")
+cmd('installing deb packages', """sudo DEBIAN_FRONTEND=noninteractive apt-get --force-yes -qq install curl gcc gettext git-core libfreetype6 libfreetype6-dev libjpeg62 libjpeg62-dev libpng12-0 libpq-dev postgresql python python-dev python-setuptools subversion  python-imaging""")
 
+cmd('building and installing memcached', 'sudo python install_memcached.py')
 
 if not os.path.exists(repo_path):
     cmd('cloning github repo', """git clone git://github.com/rajbot/tikical.git '%s'""" % (repo_path))
