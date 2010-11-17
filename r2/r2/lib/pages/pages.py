@@ -144,7 +144,7 @@ class Reddit(Templated):
             ps.append(SubredditInfoBar())
 
         if self.submit_box:
-            ps.append(SideBox(_('Submit an event'),
+            ps.append(SideBox(_('Submit a new event'),
                               '/submit', 'submit',
                               sr_path = True,
                               subtitles = [strings.submit_box_text],
