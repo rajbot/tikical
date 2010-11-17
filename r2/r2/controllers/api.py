@@ -56,7 +56,8 @@ from md5 import md5
 
 from r2.lib.promote import promote, unpromote, get_promoted
 
-from r2.models.tikical_time import PSTx
+#from r2.models.tikical_time import PSTx
+import pytz
 
 class ApiController(RedditController):
     """
@@ -216,14 +217,22 @@ class ApiController(RedditController):
             kind = 'self'
             url  = 'self'
             
-        pstx = PSTx()
+        #pstx = PSTx()
         if ('(none)' == eventtime):
-            dt = datetime.strptime(eventdate, '%m/%d/%Y')
-            dt = dt.replace(tzinfo=pstx)
+            print eventdate
+            naive_dt = datetime.strptime(eventdate, '%m/%d/%Y')
+            #dt = dt.replace(tzinfo=pstx)
         else:
-            dt = datetime.strptime(eventdate+eventtime, '%m/%d/%Y%H%M')
-            dt = dt.replace(tzinfo=pstx)
-            
+            naive_dt = datetime.strptime(eventdate+eventtime, '%m/%d/%Y%H%M')
+            #dt = dt.replace(tzinfo=pstx)
+
+        #convert to UTC
+        print naive_dt        
+        user_tz = pytz.timezone('US/Pacific') #TODO: get user's timezone from their prefs
+        user_dt = user_tz.localize(naive_dt)
+        dt      = user_dt.astimezone(pytz.utc)
+        print dt            
+
         
         if form.has_error() or not title:
             return
