@@ -56,13 +56,16 @@
         utc_dt     = pytz.utc.localize(naive_utc)
         user_tz    = pytz.timezone('US/Pacific') #TODO: get user's timezone from their prefs
         user_dt    = utc_dt.astimezone(user_tz)
-        fmt        = '%Y-%m-%d %H:%M:%S %Z'
+        fmt        = '%b %d'
         nowstr     = user_dt.strftime(fmt)
     %>
+    <span class="user">
+      Today is ${nowstr}
+    </span>
+    ${separator("|")}
     %if not c.user_is_loggedin:
       %if thing.enable_login_cover:
       <span class="user">
-        Today is ${nowstr}.&nbsp;
         ${text_with_js(_("Want to join tikical? %(register)s in seconds"),
                           register=(_("register"), "return showcover(false);"))}
       </span>
@@ -70,7 +73,6 @@
       %endif
     %else:
       <span class="user">
-         Today is ${nowstr}.&nbsp;
          ${plain_link(c.user.name, "/user/%s/" % c.user.name, _sr_path=False)}
          &nbsp;(<b>${c.user.safe_karma}</b>)
       </span>
