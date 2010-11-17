@@ -25,6 +25,8 @@
    from r2.models import Sub, FakeSubreddit
    from r2.models.subreddit import DefaultSR
    from r2.lib.pages import SearchForm
+   from datetime import datetime
+   import pytz
 %>
 <%namespace file="utils.html" import="plain_link, text_with_js, img_link, separator, logout"/>
 
@@ -52,7 +54,15 @@
     %if not c.user_is_loggedin:
       %if thing.enable_login_cover:
       <span class="user">
-        ${text_with_js(_("want to join? %(register)s in seconds"),
+        <%
+            naive_utc  = datetime.utcnow()
+            utc_dt     = pytz.utc.localize(naive_utc)
+            pacific    = pytz.timezone('US/Pacific')
+            pacific_dt = utc_dt.astimezone(pacific)
+            fmt        = '%Y-%m-%d %H:%M:%S %Z'
+            nowstr     = pacific_dt.strftime(fmt)
+        %>
+        ${text_with_js(_("Today is "+nowstr+". Want to join tikical? %(register)s in seconds"),
                           register=(_("register"), "return showcover(false);"))}
       </span>
       ${separator("|")}
