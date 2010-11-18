@@ -8,6 +8,8 @@ from r2.lib.utils import fetch_things2, worker
 from r2.lib.solrsearch import DomainSearchQuery
 
 from datetime import datetime
+from datetime import timedelta
+import pytz
 
 from pylons import g
 query_cache = g.permacache
@@ -40,7 +42,8 @@ db_times = dict(all = None,
                 month = Thing.c._date >= timeago('1 month'),
                 year = Thing.c._date >= timeago('1 year'),
                 upcoming = Thing.c._event_dt >= timeago('1 second'))
-
+                #upcoming = 'upcoming')
+                
 #we need to define the filter functions here so cachedresults can be pickled
 def filter_identity(x):
     return x
@@ -180,6 +183,16 @@ def merge_results(*results):
         #assume the prewrap_fn's all match
         m.prewrap_fn = results[0].prewrap_fn
         return m
+        
+def get_upcoming_filter():
+    """Returns a comparision to show events since midnight"""
+    user_tz = pytz.timezone('US/Pacific') #TODO: if the user is logged in, get the timezone from their prefs        
+    now = datetime.now(user_tz)
+    midnight = now - timedelta(0, now.hour*3600 + now.minute*60 + now.second + 1) #todo, why do we need to add the additional second?
+    upcoming = Thing.c._event_dt >= midnight
+    #print upcoming
+    return upcoming
+    
 
 def get_links(sr, sort, time):
     """General link query for a subreddit."""
@@ -189,7 +202,9 @@ def get_links(sr, sort, time):
     if sort == 'toplinks':
         q._filter(Link.c.top_link == True)
 
-    if time != 'all':
+    if 'upcoming' == time:
+        q._filter(get_upcoming_filter())
+    elif time != 'all':
         q._filter(db_times[time])
     return make_results(q)
 

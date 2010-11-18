@@ -28,22 +28,17 @@
 
 <div class="footer-parent">
   <div class="footer rounded">
-      %for toolbar in thing.nav():
-      <div class="col">
-        ${toolbar}
-      </div>
-      %endfor
+
 
     <p class="bottommenu">
       ${text_with_links(
-              _("Use of this site constitutes acceptance of our "
-                "%(user_agreement)s and %(privacy_policy)s"), nocname=True, 
-        user_agreement= (_("User Agreement {Genitive}"), 
-                         "http://reddit.com/help/useragreement"), 
-        privacy_policy = (_("Privacy Policy {Genitive}"), 
-                          "http://reddit.com/help/privacypolicy"))}.  
-      ${_("(c) %(year)d Conde Nast Digital. All rights reserved.") % \
-      dict(year=datetime.datetime.now().timetuple()[0])}
+              _("tikical.com "
+                "%(source_code)s and %(bug_tracker)s"), nocname=True, 
+        source_code= (_("Source Code"), 
+                         "https://github.com/rajbot/tikical"), 
+        bug_tracker = (_("Bug Tracker"), 
+                          "https://github.com/rajbot/tikical/issues"))}.  
+      ${_("available on github.")}
     </p>
   </div>
 </div>

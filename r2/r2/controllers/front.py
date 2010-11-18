@@ -233,9 +233,9 @@ class FrontController(RedditController):
               name = nop('name'))
     def GET_newreddit(self, name):
         """Create a reddit form"""
-        title = _('create a reddit')
+        title = _('create a calendar')
         content=CreateSubreddit(name = name or '')
-        res = FormPage(_("create a reddit"), 
+        res = FormPage(_("create a calendar"), 
                        content = content,
                        ).render()
         return res

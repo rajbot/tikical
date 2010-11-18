@@ -552,7 +552,10 @@ class DefaultSR(FakeSubreddit):
                             sort = queries.db_sort(sort))
             if sort == 'toplinks':
                 q._filter(Link.c.top_link == True)
-            if time != 'all':
+            
+            if 'upcoming' == time:
+                q._filter(queries.get_upcoming_filter())
+            elif time != 'all':
                 q._filter(queries.db_times[time])
             return q
 

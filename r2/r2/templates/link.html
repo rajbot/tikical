@@ -23,6 +23,7 @@
 <%!
    from r2.lib.template_helpers import get_domain
    from r2.lib.pages.things import LinkButtons
+   import pytz
 %>
  
 <%inherit  file="printable.html"/>
@@ -35,10 +36,16 @@
     %if thing.top_link:
       <a class="star" href="/toplinks">
     %endif
-    ${thing.eventdate}
+    <%
+        user_tz    = pytz.timezone('US/Pacific') #TODO: get user's timezone from their prefs
+        user_dt    = thing._event_dt.astimezone(user_tz)
+        eventdate  = user_dt.strftime('%a %m/%d')
+        eventtime  = user_dt.strftime('%I:%M %p').lstrip('0')
+    %>    
+    ${eventdate}
     %if not thing.allday:
         <br/>
-        ${thing.eventtime}
+        ${eventtime}
     %endif
     %if thing.top_link:
       </a>
