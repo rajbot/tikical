@@ -29,11 +29,10 @@
 <div class="footer-parent">
   <div class="footer rounded">
 
-
     <p class="bottommenu">
       ${text_with_links(
-              _("tikical.com "
-                "%(source_code)s and %(bug_tracker)s"), nocname=True, 
+              _("tikical.com is %(powered_by_reddit)s. - %(source_code)s and %(bug_tracker)s"), nocname=True, 
+        powered_by_reddit = (_("powered by Reddit"), "http://code.reddit.com"),
         source_code= (_("Source Code"), 
                          "https://github.com/rajbot/tikical"), 
         bug_tracker = (_("Bug Tracker"), 
