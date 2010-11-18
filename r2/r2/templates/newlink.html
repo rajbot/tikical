@@ -162,7 +162,7 @@ ${thing.formtabs_menu}
 </div>
 
 <div class="spacer">
-  <%utils:round_field title="${_('title')}" id="title-field">
+  <%utils:round_field title="${_('title')}" description="${_('(event name / location / price)')}" id="title-field">
     <textarea name="title" rows="2" cols="1" wrap="hard">${thing.title}</textarea>
     ${error_field("NO_TEXT", "title", "div")}
     ${error_field("TOO_LONG", "title", "div")}
