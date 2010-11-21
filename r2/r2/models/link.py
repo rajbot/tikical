@@ -119,16 +119,20 @@ class Link(Thing, Printable):
 
     @classmethod
     def _submit(cls, title, url, author, sr, ip, event_dt=None):
+        from r2.models import admintools
+
         l = cls(title = title,
                 url = url,
                 _spam = author._spam,
                 author_id = author._id,
-                sr_id = sr._id, 
+                sr_id = sr._id,
                 lang = sr.lang,
                 ip = ip,
                 event_dt = event_dt)
         l._commit()
         l.set_url_cache()
+        if author._spam:
+            admintools.spam(l, True, False, 'banned user')
         return l
 
     @classmethod

@@ -329,6 +329,9 @@ def sanitize_url(url, require_scheme = False):
         u = urlparse(url)
 
     if u.scheme and u.scheme in valid_schemes:
+        # if there is a scheme and no hostname, it is a bad url.
+        if not u.hostname:
+            return
         labels = u.hostname.split('.')
         for label in labels:
             try:
@@ -845,7 +848,7 @@ def fetch_things(t_class,since,until,batch_fn=None,
         q._after(t)
         things = list(q)
 
-def fetch_things2(query, chunk_size = 100, batch_fn = None):
+def fetch_things2(query, chunk_size = 100, batch_fn = None, chunks = False):
     """Incrementally run query with a limit of chunk_size until there are
     no results left. batch_fn transforms the results for each chunk
     before returning."""
@@ -861,12 +864,16 @@ def fetch_things2(query, chunk_size = 100, batch_fn = None):
         if batch_fn:
             items = batch_fn(items)
 
-        for i in items:
-            yield i
+        if chunks:
+            yield items
+        else:
+            for i in items:
+                yield i
+        after = items[-1]
 
         if not done:
             query._rules = deepcopy(orig_rules)
-            query._after(i)
+            query._after(after)
             items = list(query)
 
 def set_emptying_cache():

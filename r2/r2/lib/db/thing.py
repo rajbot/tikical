@@ -147,7 +147,9 @@ class DataThing(object):
         #copy in the cache's version
         for prop in self._base_props:
             self.__setattr__(prop, getattr(other_self, prop), False)
-        self._t = other_self._t
+
+        if other_self._loaded:
+            self._t = other_self._t
 
         #re-apply the .dirties
         old_dirties = self._dirties
@@ -610,8 +612,8 @@ def Relation(type1, type2, denorm1 = None, denorm2 = None):
             and caches them"""
             prefix = thing_prefix(cls.__name__)
 
-            thing1_dict = dict((t._id, t) for t in thing1s)
-            thing2_dict = dict((t._id, t) for t in thing2s)
+            thing1_dict = dict((t._id, t) for t in tup(thing1s))
+            thing2_dict = dict((t._id, t) for t in tup(thing2s))
 
             thing1_ids = thing1_dict.keys()
             thing2_ids = thing2_dict.keys()
