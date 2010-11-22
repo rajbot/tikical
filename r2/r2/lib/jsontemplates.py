@@ -165,6 +165,9 @@ class ThingJsonTemplate(JsonTemplate):
         elif attr == "created_utc":
             return (time.mktime(thing._date.astimezone(pytz.UTC).timetuple())
                     - time.timezone)
+        elif attr == "event_utc":
+            return (time.mktime(thing._event_dt.astimezone(pytz.UTC).timetuple())
+                    - time.timezone)
         elif attr == "child":
             return CachedVariable("childlisting")
         return getattr(thing, attr, None)
@@ -209,7 +212,8 @@ class LinkJsonTemplate(ThingJsonTemplate):
                                                 selftext     = "selftext",
                                                 num_comments = "num_comments",
                                                 subreddit    = "subreddit",
-                                                subreddit_id = "subreddit_id")
+                                                subreddit_id = "subreddit_id",
+                                                event_utc    = "event_utc")
 
     def thing_attr(self, thing, attr):
         from r2.lib.scraper import scrapers
